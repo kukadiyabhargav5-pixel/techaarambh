@@ -25,8 +25,8 @@ const contactDetails = [
   {
     icon: Mail,
     label: "Email Us",
-    value: "hello@techaarambh.com",
-    href: "mailto:hello@techaarambh.com",
+    value: "techaarambh78@gmail.com",
+    href: "mailto:techaarambh78@gmail.com",
     color: "from-blue-500 to-cyan-500",
   },
   {
