@@ -22,15 +22,13 @@ export async function POST(req: Request) {
     // Prepare data
     const contactData = { name, email, phone, service, budget, message };
 
-    // Fire and forget: We trigger both the database save and the email distribution
-    // in parallel but we do NOT await the email send to keep the response instant.
+    // On Vercel (Serverless), we MUST await all promises before returning, 
+    // otherwise the function pauses/kills the background tasks and emails don't send!
     const savePromise = new Contact(contactData).save();
-    
-    // Background the email delivery entirely
-    sendContactEmails(contactData).catch(err => console.error("BG Mail Error:", err));
+    const mailPromise = sendContactEmails(contactData);
 
-    // Wait only for the database save to ensure we don't lose data
-    await savePromise;
+    // Wait for both to finish securely
+    await Promise.all([savePromise, mailPromise]);
 
     return NextResponse.json(
       { message: "Success! Your inquiry has been sent." },
