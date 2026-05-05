@@ -16,6 +16,9 @@ import {
   Star,
   CheckCircle,
 } from "lucide-react";
+import Magnetic from "@/components/Magnetic";
+import TiltCard from "@/components/TiltCard";
+import PlexusBackground from "@/components/PlexusBackground";
 
 /* ─── Animation variants ─── */
 const fadeUp: Variants = {
@@ -143,10 +146,27 @@ function StatItem({ value, suffix, label }: { value: number; suffix: string; lab
 
 /* ─── Main Page ─── */
 export default function HomePage() {
+  const heroRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!heroRef.current) return;
+    const { clientX, clientY } = e;
+    const { left, top } = heroRef.current.getBoundingClientRect();
+    heroRef.current.style.setProperty("--mouse-x", `${clientX - left}px`);
+    heroRef.current.style.setProperty("--mouse-y", `${clientY - top}px`);
+  };
+
   return (
     <>
       {/* ── HERO ── */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden grid-bg">
+      <section
+        ref={heroRef}
+        onMouseMove={handleMouseMove}
+        className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      >
+        {/* Elite Plexus Particle Network Background */}
+        <PlexusBackground />
+
         {/* Floating orbs */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <div className="orb-1 absolute top-1/4 left-1/5 w-96 h-96 bg-blue-600/20 dark:bg-blue-600/15 rounded-full blur-3xl" />
@@ -191,26 +211,35 @@ export default function HomePage() {
 
           {/* CTA buttons */}
           <motion.div
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+            className="flex flex-col sm:flex-row items-center justify-center gap-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3 }}
           >
-            <Link
-              href="/projects"
-              id="hero-explore-btn"
-              className="inline-flex items-center gap-2 px-8 py-4 text-base font-bold text-white btn-gradient rounded-2xl shadow-xl shadow-blue-500/25"
-            >
-              Explore Our Work
-              <ArrowRight className="w-5 h-5" />
-            </Link>
-            <Link
-              href="/contact"
-              id="hero-consult-btn"
-              className="inline-flex items-center gap-2 px-8 py-4 text-base font-bold text-blue-600 dark:text-blue-400 border-2 border-blue-600 dark:border-blue-500 rounded-2xl hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600/20 transition-all duration-300"
-            >
-              Get Free Consultation
-            </Link>
+            <Magnetic strength={0.2}>
+              <TiltCard tiltIntensity={10}>
+                <Link
+                  href="/projects"
+                  id="hero-explore-btn"
+                  className="inline-flex items-center gap-2 px-8 py-4 text-base font-bold text-white btn-gradient rounded-2xl shadow-xl shadow-blue-500/25"
+                >
+                  Explore Our Work
+                  <ArrowRight className="w-5 h-5" />
+                </Link>
+              </TiltCard>
+            </Magnetic>
+
+            <Magnetic strength={0.2}>
+              <TiltCard tiltIntensity={10}>
+                <Link
+                  href="/contact"
+                  id="hero-consult-btn"
+                  className="inline-flex items-center gap-2 px-8 py-4 text-base font-bold text-blue-600 dark:text-blue-400 border-2 border-blue-600 dark:border-blue-500 rounded-2xl hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600/20 transition-all duration-300"
+                >
+                  Get Free Consultation
+                </Link>
+              </TiltCard>
+            </Magnetic>
           </motion.div>
 
           {/* Scroll indicator */}
@@ -268,23 +297,27 @@ export default function HomePage() {
           >
             {services.map((service, i) => (
               <motion.div key={service.title} variants={fadeUp} custom={i}>
-                <Link href="/services">
-                  <div className={`group relative p-6 rounded-2xl border border-gray-200 dark:border-white/8 bg-white dark:bg-dark-card hover:border-blue-300 dark:hover:border-blue-700 shadow-sm hover:shadow-xl ${service.glow} transition-all duration-300 cursor-pointer h-full`}>
-                    {/* Icon */}
-                    <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${service.color} flex items-center justify-center mb-5 shadow-md group-hover:scale-110 transition-transform duration-300`}>
-                      <service.icon className="w-7 h-7 text-white" />
-                    </div>
-                    <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3">
-                      {service.title}
-                    </h3>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
-                      {service.description}
-                    </p>
-                    <div className="mt-5 flex items-center gap-1 text-sm font-semibold text-blue-600 dark:text-blue-400 group-hover:gap-2 transition-all duration-200">
-                      Learn more <ArrowRight className="w-4 h-4" />
-                    </div>
-                  </div>
-                </Link>
+                <TiltCard className="h-full">
+                  <Magnetic strength={0.1}>
+                    <Link href="/services">
+                      <div className={`group relative p-6 rounded-2xl border border-gray-200 dark:border-white/8 bg-white dark:bg-dark-card hover:border-blue-300 dark:hover:border-blue-700 shadow-sm transition-all duration-300 cursor-pointer h-full`}>
+                        {/* Icon */}
+                        <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${service.color} flex items-center justify-center mb-5 shadow-md group-hover:scale-110 transition-transform duration-300`}>
+                          <service.icon className="w-7 h-7 text-white" />
+                        </div>
+                        <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3">
+                          {service.title}
+                        </h3>
+                        <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
+                          {service.description}
+                        </p>
+                        <div className="mt-5 flex items-center gap-1 text-sm font-semibold text-blue-600 dark:text-blue-400 group-hover:gap-2 transition-all duration-200">
+                          Learn more <ArrowRight className="w-4 h-4" />
+                        </div>
+                      </div>
+                    </Link>
+                  </Magnetic>
+                </TiltCard>
               </motion.div>
             ))}
           </motion.div>
@@ -317,19 +350,18 @@ export default function HomePage() {
             viewport={{ once: true }}
           >
             {whyUs.map((item, i) => (
-              <motion.div
-                key={item.title}
-                variants={fadeUp}
-                custom={i}
-                className="text-center p-8 rounded-2xl bg-white dark:bg-dark-card border border-gray-100 dark:border-white/5 hover:border-blue-200 dark:hover:border-blue-800 shadow-sm hover:shadow-lg transition-all duration-300"
-              >
-                <div className="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-blue-600 to-violet-600 flex items-center justify-center mb-5 shadow-md">
-                  <item.icon className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
-                  {item.title}
-                </h3>
-                <p className="text-gray-500 dark:text-gray-400 leading-relaxed">{item.desc}</p>
+              <motion.div key={item.title} variants={fadeUp} custom={i}>
+                <TiltCard className="h-full">
+                  <div className="text-center p-8 rounded-2xl bg-white dark:bg-dark-card border border-gray-100 dark:border-white/5 hover:border-blue-200 dark:hover:border-blue-800 shadow-sm transition-all duration-300 h-full">
+                    <div className="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-blue-600 to-violet-600 flex items-center justify-center mb-5 shadow-md">
+                      <item.icon className="w-8 h-8 text-white" />
+                    </div>
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                      {item.title}
+                    </h3>
+                    <p className="text-gray-500 dark:text-gray-400 leading-relaxed">{item.desc}</p>
+                  </div>
+                </TiltCard>
               </motion.div>
             ))}
           </motion.div>
@@ -359,8 +391,8 @@ export default function HomePage() {
                 R
               </div>
               <div className="text-left">
-                <div className="font-semibold text-gray-900 dark:text-white">Rajesh Kumar</div>
-                <div className="text-sm text-gray-500 dark:text-gray-400">CEO, RetailEase</div>
+                <div className="font-semibold text-gray-900 dark:text-white">Roshan Balar</div>
+                <div className="text-sm text-gray-500 dark:text-gray-400">Manager, Bharti Glooms</div>
               </div>
             </div>
           </motion.div>

@@ -148,7 +148,7 @@ export default function ProjectsPage() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7"
+              className="grid grid-cols-1 md:grid-cols-2 gap-6"
             >
               {filtered.map((project, i) => (
                 <motion.div
@@ -157,61 +157,71 @@ export default function ProjectsPage() {
                   initial="hidden"
                   animate="visible"
                   custom={i}
-                  className="group flex flex-col bg-white dark:bg-dark-card rounded-2xl border border-gray-100 dark:border-white/8 overflow-hidden hover:border-blue-200 dark:hover:border-blue-800 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 hover:-translate-y-2"
+                  className={`group relative rounded-3xl overflow-hidden transition-all duration-500 hover:-translate-y-1 ${
+                    i === 0 ? "md:col-span-2" : ""
+                  }`}
                 >
-                  {/* Banner */}
-                  <div className={`h-40 bg-gradient-to-br ${project.banner} relative overflow-hidden`}>
-                    <div className="absolute inset-0 opacity-20">
-                      <div className="absolute top-4 left-4 w-24 h-24 bg-white rounded-full blur-xl" />
-                      <div className="absolute bottom-2 right-4 w-16 h-16 bg-white rounded-full blur-xl" />
-                    </div>
-                    <div className="absolute bottom-4 left-4">
-                      <span className="text-2xl font-black text-white/90">
-                        {project.title.charAt(0)}
-                      </span>
-                    </div>
-                    <div className="absolute top-4 right-4">
-                      <span className={`px-3 py-1 rounded-full text-xs font-bold ${project.badgeColor} backdrop-blur-sm`}>
-                        {project.category}
-                      </span>
-                    </div>
-                  </div>
+                  {/* Animated border glow */}
+                  <div className="absolute -inset-[1px] rounded-3xl bg-gradient-to-r from-blue-500 via-violet-500 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-[1px]" />
 
-                  {/* Content */}
-                  <div className="flex flex-col flex-1 p-6">
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-200">
-                      {project.title}
-                    </h3>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed mb-4 flex-1">
-                      {project.description}
-                    </p>
-
-                    {/* Impact badge */}
-                    <div className="flex items-center gap-2 mb-4">
-                      <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/20 px-3 py-1 rounded-full border border-emerald-200 dark:border-emerald-800">
-                        📈 {project.impact}
-                      </span>
-                    </div>
-
-                    {/* Tech badges */}
-                    <div className="flex flex-wrap gap-1.5 mb-5">
-                      {project.tech.map((t) => (
-                        <span
-                          key={t}
-                          className="px-2.5 py-1 text-xs font-medium rounded-md bg-gray-100 dark:bg-white/10 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-white/10"
-                        >
-                          {t}
+                  <div className="relative flex flex-col sm:flex-row bg-white dark:bg-[#12121C] rounded-3xl overflow-hidden border border-gray-200/60 dark:border-white/[0.06] group-hover:border-transparent">
+                    {/* Gradient side / top */}
+                    <div className={`relative shrink-0 ${i === 0 ? "sm:w-72" : "sm:w-56"} h-48 sm:h-auto bg-gradient-to-br ${project.banner} overflow-hidden`}>
+                      <div className="absolute inset-0 opacity-30">
+                        <div className="absolute -top-6 -left-6 w-32 h-32 bg-white rounded-full blur-2xl" />
+                        <div className="absolute bottom-4 right-4 w-20 h-20 bg-white rounded-full blur-2xl" />
+                      </div>
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <span className="text-6xl font-black text-white/25 group-hover:text-white/40 group-hover:scale-110 transition-all duration-500">
+                          {project.title.charAt(0)}
                         </span>
-                      ))}
+                      </div>
+                      <div className="absolute top-4 right-4 sm:top-4 sm:left-4 sm:right-auto">
+                        <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-white/20 text-white backdrop-blur-md border border-white/20">
+                          {project.category}
+                        </span>
+                      </div>
                     </div>
 
-                    <button
-                      id={`view-project-${project.id}`}
-                      className="w-full flex items-center justify-center gap-2 py-2.5 text-sm font-semibold text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-800 rounded-xl hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 dark:hover:text-white hover:border-blue-600 transition-all duration-200"
-                    >
-                      View Details
-                      <ExternalLink className="w-4 h-4" />
-                    </button>
+                    {/* Content */}
+                    <div className="flex flex-col flex-1 p-6 sm:p-7 gap-4">
+                      <div>
+                        <h3 className="text-xl font-extrabold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
+                          {project.title}
+                        </h3>
+                        <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed line-clamp-3">
+                          {project.description}
+                        </p>
+                      </div>
+
+                      {/* Impact */}
+                      <div className="flex items-center gap-2">
+                        <span className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/20 px-3 py-1.5 rounded-lg border border-emerald-200/60 dark:border-emerald-700/40">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                          {project.impact}
+                        </span>
+                      </div>
+
+                      {/* Tech */}
+                      <div className="flex flex-wrap gap-2 mt-auto">
+                        {project.tech.map((t) => (
+                          <span
+                            key={t}
+                            className="px-3 py-1 text-[11px] font-semibold rounded-lg bg-gray-100 dark:bg-white/[0.06] text-gray-600 dark:text-gray-300 border border-gray-200/80 dark:border-white/[0.08]"
+                          >
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+
+                      <button
+                        id={`view-project-${project.id}`}
+                        className="mt-1 w-full sm:w-auto self-start inline-flex items-center justify-center gap-2 px-6 py-2.5 text-sm font-bold rounded-xl bg-gray-900 dark:bg-white/10 text-white hover:bg-blue-600 dark:hover:bg-blue-600 transition-all duration-200 shadow-sm"
+                      >
+                        View Details
+                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
+                      </button>
+                    </div>
                   </div>
                 </motion.div>
               ))}

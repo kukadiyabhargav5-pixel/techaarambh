@@ -45,13 +45,12 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-600 to-violet-600 flex items-center justify-center shadow-md group-hover:shadow-blue-500/40 transition-shadow duration-300">
-              <Zap className="w-4 h-4 text-white" fill="white" />
-            </div>
-            <span className="text-xl font-extrabold gradient-text tracking-tight">
-              Techaarambh
-            </span>
+          <Link href="/" className="flex items-center group">
+            <img 
+              src="/logo.png" 
+              alt="Techaarambh Logo" 
+              className="h-12 w-auto object-contain" 
+            />
           </Link>
 
           {/* Desktop Links */}

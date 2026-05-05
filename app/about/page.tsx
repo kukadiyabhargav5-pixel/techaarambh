@@ -45,17 +45,18 @@ const values = [
 ];
 
 const team = [
-  { name: "Tirth Italiya", role: "Founder & Frontend Developer", initials: "IT", color: "from-blue-600 to-violet-600" },
-  { name: "Bhargav Kukadiya", role: "Co-Founder & Backend Developer", initials: "BK", color: "from-violet-600 to-pink-600" },
+  { name: "Tirth Italiya", role: "Founder ", initials: "IT", color: "from-blue-600 to-violet-600" },
+  { name: "Bhargav Kukadiya", role: "Co-Founder", initials: "BK", color: "from-violet-600 to-pink-600" },
   { name: "Yashvi Changela", role: "Data Analyst", initials: "YC", color: "from-cyan-500 to-blue-600" },
   { name: "Jensi Savaliya", role: "Application Developer", initials: "JS", color: "from-cyan-500 to-blue-600" },
+  { name: "Vishwa Akhbari", role: "UIUX Designer", initials: "VA", color: "from-cyan-500 to-blue-600" },
 ];
 
 
 const techStack = [
   { name: "React", color: "bg-cyan-100 text-cyan-700 dark:bg-cyan-900/30 dark:text-cyan-400" },
   { name: "Next.js", color: "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-200" },
-  { name: "Python", color: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400" },
+  // { name: "Python", color: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400" },
   { name: "Node.js", color: "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400" },
   { name: "MongoDB", color: "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400" },
   { name: "Figma", color: "bg-pink-100 text-pink-700 dark:bg-pink-900/30 dark:text-pink-400" },

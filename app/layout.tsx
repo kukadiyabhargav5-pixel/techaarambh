@@ -3,6 +3,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import CustomCursor from "@/components/CustomCursor";
 
 export const metadata: Metadata = {
   title: "Techaarambh — Where Technology Begins | IT Services India",
@@ -37,6 +38,7 @@ export default function RootLayout({
         className="font-inter bg-light-bg dark:bg-dark-bg text-gray-900 dark:text-gray-100 transition-colors duration-300"
       >
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+          <CustomCursor />
           <Navbar />
           <main>{children}</main>
           <Footer />
