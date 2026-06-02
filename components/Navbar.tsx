@@ -19,7 +19,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme, resolvedTheme } = useTheme();
   const pathname = usePathname();
 
   useEffect(() => {
@@ -29,7 +29,7 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const toggleTheme = () => setTheme(theme === "dark" ? "light" : "dark");
+  const toggleTheme = () => setTheme(resolvedTheme === "dark" ? "light" : "dark");
 
   return (
     <motion.nav
@@ -67,14 +67,14 @@ export default function Navbar() {
                       : "text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
                   }`}
                 >
-                  {link.label}
+                  <span className="relative z-10">{link.label}</span>
                   {isActive && (
                     <motion.div
                       layoutId="activeLink"
-                      className="absolute bottom-0 left-2 right-2 h-0.5 bg-gradient-to-r from-blue-600 to-violet-600 rounded-full"
+                      className="absolute bottom-0 left-2 right-2 h-0.5 bg-gradient-to-r from-blue-600 to-violet-600 rounded-full z-10"
                     />
                   )}
-                  <span className="absolute inset-0 rounded-lg bg-blue-50 dark:bg-blue-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+                  <span className="absolute inset-0 rounded-lg bg-blue-50 dark:bg-blue-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-0" />
                 </Link>
               );
             })}
@@ -89,7 +89,7 @@ export default function Navbar() {
                 aria-label="Toggle theme"
                 className="p-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white/50 dark:bg-white/5 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all duration-200"
               >
-                {theme === "dark" ? (
+                {resolvedTheme === "dark" ? (
                   <Sun className="w-5 h-5 text-amber-400" />
                 ) : (
                   <Moon className="w-5 h-5 text-blue-600" />
@@ -112,7 +112,7 @@ export default function Navbar() {
                 aria-label="Toggle theme"
                 className="p-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white/50 dark:bg-white/5"
               >
-                {theme === "dark" ? (
+                {resolvedTheme === "dark" ? (
                   <Sun className="w-4 h-4 text-amber-400" />
                 ) : (
                   <Moon className="w-4 h-4 text-blue-600" />

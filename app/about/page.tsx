@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { motion, type Variants } from "framer-motion";
 import { Lightbulb, ShieldCheck, Eye, Heart } from "lucide-react";
 
@@ -44,14 +45,64 @@ const values = [
   },
 ];
 
-const team = [
-  { name: "Tirth Italiya", role: "Founder ", initials: "IT", color: "from-blue-600 to-violet-600" },
-  { name: "Bhargav Kukadiya", role: "Co-Founder", initials: "BK", color: "from-violet-600 to-pink-600" },
-  { name: "Yashvi Changela", role: "Data Analyst", initials: "YC", color: "from-cyan-500 to-blue-600" },
-  { name: "Jensi Savaliya", role: "Application Developer", initials: "JS", color: "from-cyan-500 to-blue-600" },
-  { name: "Vishwa Akhbari", role: "UIUX Designer", initials: "VA", color: "from-cyan-500 to-blue-600" },
-];
+interface TeamMember {
+  name: string;
+  role: string;
+  initials: string;
+  color: string;
+  yearsIndustry: string;
+  yearsDM: string;
+  bio: string;
+  image?: string;
+}
 
+const team: TeamMember[] = [
+  {
+    name: "Tirth Italiya",
+    role: "Founder",
+    initials: "IT",
+    color: "from-blue-600 to-violet-600",
+    yearsIndustry: "3+",
+    yearsDM: "2+",
+    bio: "Tirth Italiya leads the strategic vision and growth of Techaarambh. He is committed to architecting modern digital products that scale.",
+  },
+  {
+    name: "Bhargav Kukadiya",
+    role: "Co-Founder",
+    initials: "BK",
+    color: "from-violet-600 to-pink-600",
+    yearsIndustry: "3+",
+    yearsDM: "2+",
+    bio: "Bhargav Kukadiya drives operations and customer success at Techaarambh. He ensures our digital solutions align with client business goals.",
+  },
+  {
+    name: "Yashvi Changela",
+    role: "Data Analyst",
+    initials: "YC",
+    color: "from-cyan-500 to-blue-600",
+    yearsIndustry: "2+",
+    yearsDM: "1+",
+    bio: "Yashvi Changela translates complex datasets into actionable strategies, helping clients make data-driven decisions that accelerate growth.",
+  },
+  {
+    name: "Jensi Savaliya",
+    role: "Application Developer",
+    initials: "JS",
+    color: "from-cyan-500 to-blue-600",
+    yearsIndustry: "2+",
+    yearsDM: "1.5+",
+    bio: "Jensi Savaliya designs and builds high-performance web and mobile apps, ensuring speed, clean code, and seamless user experiences.",
+  },
+  {
+    name: "Vishwa Akhbari",
+    role: "UIUX Designer",
+    initials: "VA",
+    color: "from-cyan-500 to-blue-600",
+    yearsIndustry: "2+",
+    yearsDM: "1.5+",
+    bio: "Vishwa Akhbari crafts intuitive and stunning interfaces, blending rich aesthetics with user-centric design principles to delight users.",
+  },
+];
 
 const techStack = [
   { name: "React", color: "bg-cyan-100 text-cyan-700 dark:bg-cyan-900/30 dark:text-cyan-400" },
@@ -65,6 +116,98 @@ const techStack = [
   { name: "PostgreSQL", color: "bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-400" },
   { name: "Firebase", color: "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400" },
 ];
+
+function TeamCard({ member }: { member: TeamMember }) {
+  const [isFlipped, setIsFlipped] = useState(false);
+
+  return (
+    <div
+      className="perspective-1000 w-full h-[410px] cursor-pointer hover:scale-[1.02] transition-transform duration-300"
+      onClick={() => setIsFlipped(!isFlipped)}
+    >
+      <div
+        className={`relative w-full h-full flip-card-inner preserve-3d ${
+          isFlipped ? "rotate-y-180" : ""
+        }`}
+      >
+        {/* Front Face */}
+        <div className="absolute inset-0 w-full h-full backface-hidden rounded-2xl bg-white dark:bg-dark-card border border-gray-100 dark:border-white/5 hover:border-blue-200 dark:hover:border-blue-800 hover:shadow-xl transition-all duration-300 flex flex-col justify-center items-center p-8">
+          <div
+            className={`w-24 h-24 rounded-full bg-gradient-to-br ${member.color} flex items-center justify-center text-3xl font-extrabold text-white mb-5 shadow-xl group-hover:scale-105 transition-transform duration-300`}
+          >
+            {member.initials}
+          </div>
+          <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1">
+            {member.name}
+          </h3>
+          <p className="text-sm text-gray-500 dark:text-gray-400">
+            {member.role}
+          </p>
+          <div className="absolute bottom-4 flex items-center gap-1.5 text-[11px] font-semibold text-blue-600 dark:text-blue-400 opacity-60 hover:opacity-100 transition-opacity duration-300">
+            <span>Tap to view details</span>
+          </div>
+        </div>
+
+        {/* Back Face */}
+        <div className="absolute inset-0 w-full h-full backface-hidden rotate-y-180 rounded-2xl bg-white dark:bg-[#0D0D16] border border-gray-200 dark:border-white/10 p-5 flex flex-col justify-between shadow-2xl">
+          {/* Inner dark-ish upper card */}
+          <div className="p-4 rounded-xl bg-gray-50 dark:bg-dark-card border border-gray-100 dark:border-white/5 flex flex-col items-center w-full">
+            {member.image ? (
+              <div className="w-16 h-16 rounded-full border-2 border-white dark:border-gray-800 overflow-hidden mb-3 shadow-md">
+                <img
+                  src={member.image}
+                  alt={member.name}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            ) : (
+              <div
+                className={`w-16 h-16 rounded-full bg-gradient-to-br ${member.color} flex items-center justify-center text-xl font-bold text-white mb-3 border-2 border-white dark:border-gray-800 shadow-md`}
+              >
+                {member.initials}
+              </div>
+            )}
+            <h3 className="text-base font-bold text-gray-900 dark:text-white mb-0.5">
+              {member.name}
+            </h3>
+            <p className="text-xs text-gray-500 dark:text-gray-400 font-medium">
+              {member.role}
+            </p>
+          </div>
+
+          {/* Stats Boxes (Industry and Company) */}
+          <div className="grid grid-cols-2 gap-3 mt-3">
+            <div className="py-2.5 px-2 rounded-xl bg-gray-50 dark:bg-[#1A1A26] border border-gray-100 dark:border-white/5 text-center">
+              <div className="text-[9px] uppercase tracking-wider text-gray-400 dark:text-gray-500 font-bold mb-1">
+                Years in Industry
+              </div>
+              <div className="text-base font-black text-gray-900 dark:text-white">
+                {member.yearsIndustry}
+              </div>
+            </div>
+            <div className="py-2.5 px-2 rounded-xl bg-gray-50 dark:bg-[#1A1A26] border border-gray-100 dark:border-white/5 text-center">
+              <div className="text-[9px] uppercase tracking-wider text-gray-400 dark:text-gray-500 font-bold mb-1">
+                Years at DM
+              </div>
+              <div className="text-base font-black text-gray-900 dark:text-white">
+                {member.yearsDM}
+              </div>
+            </div>
+          </div>
+
+          {/* Description Text */}
+          <p className="mt-3.5 text-xs text-gray-500 dark:text-gray-400 leading-relaxed text-left px-1 flex-grow">
+            {member.bio}
+          </p>
+
+          <div className="text-[10px] text-center text-gray-400 dark:text-gray-600 mt-2">
+            Tap to flip back
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function AboutPage() {
   return (
@@ -248,13 +391,8 @@ export default function AboutPage() {
                 key={member.name}
                 variants={fadeUp}
                 custom={i}
-                className="group text-center p-8 rounded-2xl bg-white dark:bg-dark-card border border-gray-100 dark:border-white/5 hover:border-blue-200 dark:hover:border-blue-800 hover:shadow-xl transition-all duration-300"
               >
-                <div className={`w-24 h-24 mx-auto rounded-full bg-gradient-to-br ${member.color} flex items-center justify-center text-3xl font-extrabold text-white mb-5 shadow-xl group-hover:scale-105 transition-transform duration-300`}>
-                  {member.initials}
-                </div>
-                <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1">{member.name}</h3>
-                <p className="text-sm text-gray-500 dark:text-gray-400">{member.role}</p>
+                <TeamCard member={member} />
               </motion.div>
             ))}
           </motion.div>
@@ -292,3 +430,4 @@ export default function AboutPage() {
     </div>
   );
 }
+ 

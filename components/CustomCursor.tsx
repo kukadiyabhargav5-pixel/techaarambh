@@ -7,9 +7,16 @@ export default function CustomCursor() {
   const [isHovering, setIsHovering] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
 
   useEffect(() => {
     setMounted(true);
+    // Detect touch/mobile devices
+    const isTouch =
+      'ontouchstart' in window ||
+      navigator.maxTouchPoints > 0 ||
+      window.matchMedia('(pointer: coarse)').matches;
+    setIsTouchDevice(isTouch);
   }, []);
 
   // Motion values for high performance
@@ -58,7 +65,7 @@ export default function CustomCursor() {
     };
   }, [handleMouseMove, handleMouseOver, handleMouseOut]);
 
-  if (!mounted) return null;
+  if (!mounted || isTouchDevice) return null;
 
   return (
     <div className={`pointer-events-none fixed inset-0 z-[9999] ${isVisible ? "opacity-100" : "opacity-0"} transition-opacity duration-300 ${isHovering ? "cursor-hover" : ""}`}>

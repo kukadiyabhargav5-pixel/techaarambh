@@ -21,69 +21,15 @@ const categories: Category[] = ["All", "Website", "App", "Analytics", "Marketing
 const projects = [
   {
     id: 1,
-    title: "RetailEase",
+    title: "Bharti Glooms",
     description:
-      "A high-performance e-commerce website for a mid-sized retail brand. Includes product catalogue, cart, Stripe payments, and an admin dashboard.",
+      "A premium fashion e-commerce website with cart, wishlist, and Razorpay checkout — built for a modern retail brand.",
     category: "Website" as Category,
-    tech: ["Next.js", "Tailwind CSS", "Stripe", "Sanity CMS"],
-    banner: "from-blue-500 via-cyan-500 to-blue-600",
-    badgeColor: "bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300",
-    impact: "3× increase in online sales",
-  },
-  {
-    id: 2,
-    title: "DataPulse Dashboard",
-    description:
-      "An interactive sales analytics dashboard for an FMCG company. Real-time KPIs, trend charts, and automated weekly reports via email.",
-    category: "Analytics" as Category,
-    tech: ["Python", "Power BI", "SQL", "Pandas"],
-    banner: "from-violet-500 via-purple-500 to-violet-700",
-    badgeColor: "bg-violet-100 text-violet-700 dark:bg-violet-900/40 dark:text-violet-300",
-    impact: "40% faster decisions",
-  },
-  {
-    id: 3,
-    title: "QuickDeliver App",
-    description:
-      "A cross-platform food delivery mobile application with real-time order tracking, restaurant management, and driver assignment system.",
-    category: "App" as Category,
-    tech: ["React Native", "Node.js", "MongoDB", "Socket.io"],
-    banner: "from-cyan-500 via-teal-500 to-cyan-700",
-    badgeColor: "bg-cyan-100 text-cyan-700 dark:bg-cyan-900/40 dark:text-cyan-300",
-    impact: "5K+ downloads in month 1",
-  },
-  {
-    id: 4,
-    title: "GrowLocal Campaign",
-    description:
-      "A comprehensive digital marketing campaign for a local restaurant chain expanding across 3 cities — SEO, Meta Ads, and Google Ads managed end-to-end.",
-    category: "Marketing" as Category,
-    tech: ["Meta Ads", "Google Ads", "SEMrush", "Google Analytics"],
-    banner: "from-pink-500 via-rose-500 to-pink-700",
+    tech: ["Next.js", "TailwindCSS", "MongoDB", "Razorpay"],
+    banner: "from-rose-500 via-pink-500 to-fuchsia-600",
     badgeColor: "bg-pink-100 text-pink-700 dark:bg-pink-900/40 dark:text-pink-300",
-    impact: "320% ROAS achieved",
-  },
-  {
-    id: 5,
-    title: "MedTrack System",
-    description:
-      "A secure hospital patient tracking web application with appointment scheduling, medical history records, and role-based access for doctors and staff.",
-    category: "App" as Category,
-    tech: ["React", "Express.js", "PostgreSQL", "JWT Auth"],
-    banner: "from-emerald-500 via-green-500 to-emerald-700",
-    badgeColor: "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300",
-    impact: "Serving 500+ patients/day",
-  },
-  {
-    id: 6,
-    title: "StyleHub Store",
-    description:
-      "A fashion e-commerce platform with inventory management, wishlist, Razorpay checkout, and a headless CMS for the marketing team to manage content independently.",
-    category: "Website" as Category,
-    tech: ["Next.js", "Sanity CMS", "Razorpay", "Framer Motion"],
-    banner: "from-amber-500 via-orange-500 to-amber-700",
-    badgeColor: "bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300",
-    impact: "₹12L revenue in Q1",
+    impact: "50+ orders in first month",
+    link: "https://www.bhartiglooms.in/",
   },
 ];
 
@@ -214,13 +160,16 @@ export default function ProjectsPage() {
                         ))}
                       </div>
 
-                      <button
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         id={`view-project-${project.id}`}
                         className="mt-1 w-full sm:w-auto self-start inline-flex items-center justify-center gap-2 px-6 py-2.5 text-sm font-bold rounded-xl bg-gray-900 dark:bg-white/10 text-white hover:bg-blue-600 dark:hover:bg-blue-600 transition-all duration-200 shadow-sm"
                       >
-                        View Details
-                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
-                      </button>
+                        View Live Site
+                        <ExternalLink className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
+                      </a>
                     </div>
                   </div>
                 </motion.div>
