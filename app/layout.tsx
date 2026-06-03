@@ -93,8 +93,7 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    // Add your Google Search Console verification code here
-    // google: "your-google-verification-code",
+    google: "google1da1fc4203b95efb",
   },
   category: "technology",
 };
