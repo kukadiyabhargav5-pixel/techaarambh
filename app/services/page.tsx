@@ -326,14 +326,14 @@ export default function ServicesPage() {
             </motion.div>
 
             {/* Title */}
-            <h2 className="text-4xl md:text-7xl font-bold font-pt-sans leading-tight mb-4 text-gray-900 dark:text-white">
+            <h1 className="text-4xl md:text-7xl font-bold font-pt-sans leading-tight mb-4 text-gray-900 dark:text-white">
               Showcasing Our Creative Solutions
-            </h2>
+            </h1>
 
             {/* Subtitle */}
-            <h1 className="text-[36px] md:text-[68px] font-normal font-allison text-[#2563EB] leading-none mb-6">
+            <p className="text-[36px] md:text-[68px] font-normal font-allison text-[#2563EB] leading-none mb-6">
               with innovation, strategy, and design excellence.
-            </h1>
+            </p>
 
             {/* Description */}
             <p className="text-sm md:text-xl text-gray-500 dark:text-gray-400 font-nunito max-w-4xl mx-auto leading-relaxed">
