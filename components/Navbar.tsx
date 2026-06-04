@@ -51,9 +51,14 @@ export default function Navbar() {
               alt="Techaarambh Logo" 
               className="h-10 w-auto object-contain" 
             />
-            <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent hidden sm:inline">
-              Techaarambh
-            </span>
+            <div className="hidden sm:flex flex-col leading-tight">
+              <span className="text-lg font-extrabold text-[#1a2b6b] dark:text-blue-400 tracking-tight">
+                Techaarambh
+              </span>
+              <span className="text-[10px] font-semibold text-orange-500 tracking-wide">
+                Web and App Development
+              </span>
+            </div>
           </Link>
 
           {/* Desktop Links */}
