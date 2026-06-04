@@ -44,20 +44,12 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           {/* Column 1: Logo + tagline */}
           <div>
-            <Link href="/" className="flex items-center gap-2 mb-4">
+            <Link href="/" className="flex items-center mb-4">
               <img 
                 src="/logo.png" 
                 alt="Techaarambh Logo" 
-                className="h-12 w-auto object-contain" 
+                className="h-14 w-auto object-contain" 
               />
-              <div className="flex flex-col leading-tight">
-                <span className="text-xl font-extrabold text-[#1a2b6b] dark:text-blue-400 tracking-tight">
-                  Techaarambh
-                </span>
-                <span className="text-[11px] font-semibold text-orange-500 tracking-wide">
-                  Web and App Development
-                </span>
-              </div>
             </Link>
             <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed mb-6">
               Where Technology Begins. We craft digital solutions that power businesses across India and beyond.
