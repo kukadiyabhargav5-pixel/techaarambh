@@ -44,12 +44,15 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           {/* Column 1: Logo + tagline */}
           <div>
-            <Link href="/" className="flex items-center mb-4">
+            <Link href="/" className="flex items-center gap-2 mb-4">
               <img 
                 src="/logo.png" 
                 alt="Techaarambh Logo" 
-                className="h-16 w-auto object-contain" 
+                className="h-12 w-auto object-contain" 
               />
+              <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
+                Techaarambh
+              </span>
             </Link>
             <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed mb-6">
               Where Technology Begins. We craft digital solutions that power businesses across India and beyond.
